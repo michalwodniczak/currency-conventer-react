@@ -1,10 +1,8 @@
-
+import Header from "./Header";
 function App() {
   return (
     <div className="container">
-        <header className="header">
-            <h1 className="header__head">Wymiana walut</h1>
-        </header>
+        <Header/>
         <main>
             <form className="js-form">
                 <label>
