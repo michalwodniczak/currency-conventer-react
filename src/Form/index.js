@@ -5,11 +5,13 @@ const Form = () => {
     const onFormSubmit = (event) => {
         event.preventDefault();
     }
-
+    
+    const [currency, setCurrency] = useState("Dolar Amerykański")
+    const changeCurrency = ({ target }) => {
+        setCurrency(target.value)
+    }
     const [amount, setAmount] = useState("");
-
-
-
+    
     return (
         <form onSubmit={onFormSubmit}>
             <label>
@@ -17,7 +19,10 @@ const Form = () => {
                     Wybierz walute na którą chcesz wymienić*:
                 </span>
                 <select
-                    className="form__input">
+                    value={currency}
+                    className="form__input"
+                    onChange={changeCurrency}
+                >
                     {currencies.map(currency => (<option key={currency.id}>{currency.name}</option>)
                     )}
                 </select>
@@ -28,13 +33,16 @@ const Form = () => {
                     value={amount}
                     onChange={({ target }) => setAmount(target.value)}
                     className="form__input"
-                    type="number" name="amount"
+                    type="number"
+                    name="amount"
                     step="any"
                     min="1"
                     required
                 />
             </label>
-            <button className="form__button" type="submit">
+            <button
+                className="form__button"
+                type="submit">
                 Przelicz
             </button>
             <p className="form__resultText">
