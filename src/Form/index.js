@@ -1,17 +1,18 @@
 import { useState } from "react";
 import "./style.css"
 import { currencies } from "../currencies";
-const Form = () => {
+const Form = ({ result, calculateResult }) => {
     const onFormSubmit = (event) => {
         event.preventDefault();
+        calculateResult(amount, currency.ratio)
     }
-    
-    const [currency, setCurrency] = useState("Dolar Amerykański")
+
+    const [currency, setCurrency] = useState(currencies)
     const changeCurrency = ({ target }) => {
         setCurrency(target.value)
     }
     const [amount, setAmount] = useState("");
-    
+
     return (
         <form onSubmit={onFormSubmit}>
             <label>
@@ -19,7 +20,7 @@ const Form = () => {
                     Wybierz walute na którą chcesz wymienić*:
                 </span>
                 <select
-                    value={currency}
+                    value={currency.ratio}
                     className="form__input"
                     onChange={changeCurrency}
                 >
@@ -41,13 +42,16 @@ const Form = () => {
                 />
             </label>
             <button
+                onClick={() => calculateResult(amount, currency.ratio)}
                 className="form__button"
                 type="submit">
                 Przelicz
             </button>
             <p className="form__resultText">
                 Tutaj pojawi się kurs walut
+                {result}
             </p>
+
             <p>
                 Kurs walut z dnia 27.12.2022
             </p>
