@@ -5,11 +5,13 @@ const Form = ({ result, calculateResult }) => {
     const onFormSubmit = (event) => {
         event.preventDefault();
         calculateResult(amount, currency.ratio)
+        console.log(amount)
+        console.log(currency.ratio)
     }
 
-    const [currency, setCurrency] = useState(currencies)
-    const changeCurrency = ({ target }) => {
-        setCurrency(target.value)
+    const [currency, setCurrency] = useState(currencies.find(currency => currency.ratio))
+    const onChangeCurrency = ({ target }) => {
+        setCurrency(target.value === currencies.find(currency => currency.ratio))
     }
     const [amount, setAmount] = useState("");
 
@@ -22,7 +24,7 @@ const Form = ({ result, calculateResult }) => {
                 <select
                     value={currency.ratio}
                     className="form__input"
-                    onChange={changeCurrency}
+                    onChange={onChangeCurrency}
                 >
                     {currencies.map(currency => (<option key={currency.id}>{currency.name}</option>)
                     )}
