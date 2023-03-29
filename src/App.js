@@ -7,7 +7,7 @@ function App() {
     const [result, setResult] = useState()
 
     const calculateResult = (amount, currency) => {
-        const calculateResult = amount * currency
+        const calculateResult = amount / currency
         setResult(calculateResult.toFixed(2))
     }
 
