@@ -1,18 +1,19 @@
 import { useState } from "react";
-import "./style.css"
+import "./style.css";
 import { currencies } from "../currencies";
 const Form = ({ result, calculateResult }) => {
-    const [currency, setCurrency] = useState(currencies.find(currency => currency.ratio));
+    const [currency, setCurrency] = useState(currencies[0]);
     const onFormSubmit = (event) => {
         event.preventDefault();
-        calculateResult(amount, currency.ratio)
-        console.log(amount)
-        console.log(currency.ratio)
+        calculateResult(amount, currency.ratio);
+        console.log(amount);
+        console.log(currency.ratio);
     }
 
 
     const onChangeCurrency = ({ target }) => {
-        setCurrency(target.value === currencies.find(currency => currency.ratio))
+        const selectCurrency = currencies.find(currency => currency.name === target.value);
+        setCurrency(selectCurrency);
     }
     const [amount, setAmount] = useState("");
 
@@ -62,4 +63,4 @@ const Form = ({ result, calculateResult }) => {
     )
 }
 
-export { Form }
+export { Form };
