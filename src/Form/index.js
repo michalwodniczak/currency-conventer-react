@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./style.css"
 import { currencies } from "../currencies";
 const Form = ({ result, calculateResult }) => {
+    const [currency, setCurrency] = useState(currencies.find(currency => currency.ratio));
     const onFormSubmit = (event) => {
         event.preventDefault();
         calculateResult(amount, currency.ratio)
@@ -9,7 +10,7 @@ const Form = ({ result, calculateResult }) => {
         console.log(currency.ratio)
     }
 
-    const [currency, setCurrency] = useState(currencies.find(currency => currency.ratio))
+
     const onChangeCurrency = ({ target }) => {
         setCurrency(target.value === currencies.find(currency => currency.ratio))
     }
@@ -27,7 +28,7 @@ const Form = ({ result, calculateResult }) => {
                     onChange={onChangeCurrency}
                 >
                     {currencies.map(currency => (<option key={currency.id}>{currency.name}</option>)
-                    )}
+                    )};
                 </select>
             </label>
             <label>
