@@ -8,7 +8,7 @@ function App() {
 
     const calculateResult = (amount, currency) => {
         const calculateResult = amount / currency
-        setResult(calculateResult.toFixed(2))
+        setResult(calculateResult.toFixed(2));
     }
 
     return (
