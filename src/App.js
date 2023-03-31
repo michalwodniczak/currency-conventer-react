@@ -4,12 +4,12 @@ import { Footer } from "./Footer";
 import { useState } from "react";
 
 function App() {
-    const [result, setResult] = useState()
+    const [result, setResult] = useState();
 
     const calculateResult = (amount, currency) => {
         const calculateResult = amount / currency
         setResult(calculateResult.toFixed(2))
-    }
+    };
 
     return (
         <div className="container">
