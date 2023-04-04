@@ -6,7 +6,7 @@ const Form = ({ result, calculateResult }) => {
     const [amount, setAmount] = useState("");
     const onFormSubmit = (event) => {
         event.preventDefault();
-        calculateResult(amount, currency.ratio);
+        calculateResult(amount, currency);
     };
 
     const onChangeCurrency = ({ target }) => {
@@ -49,7 +49,7 @@ const Form = ({ result, calculateResult }) => {
                 Przelicz
             </button>
             <p className="form__resultText">
-                {result > 0 ? `za ${amount} zł Otrzymamy ${result}` : "Tutaj pojawi się kurs walut:"}
+                {result > 0 ? `za ${result.targetAmount}  zł Otrzymamy ${result.currency}` : "Tutaj pojawi się kurs walut:"}
             </p>
             <p>
                 Kurs walut z dnia 27.12.2022
