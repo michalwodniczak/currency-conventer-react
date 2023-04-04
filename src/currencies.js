@@ -8,7 +8,6 @@ const currencies = [
         id: "EUR",
         name: "Euro",
         ratio: 4.69,
-        forResult: "Euro"
     },
     {
         id: "GBP",
