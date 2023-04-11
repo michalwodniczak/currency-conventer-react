@@ -49,7 +49,7 @@ const Form = ({ result, calculateResult }) => {
                 Przelicz
             </button>
             <p className="form__resultText">
-                {result > 0 ? `za ${result.sourceAmount.value}  zł ${result.targetAmount.value} ${result.currency.id}` : "Tutaj pojawi się kurs walut:"}
+                {result > 0 ? `za ${result.sourceAmount}  zł ${result.targetAmount} ${result.currency.id}` : "Tutaj pojawi się kurs walut:"}
             </p>
             <p>
                 Kurs walut z dnia 27.12.2022
