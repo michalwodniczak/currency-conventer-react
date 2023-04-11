@@ -10,10 +10,10 @@ function App() {
     const calculateResult = (amount, currency) => {
         const rate = currency?.ratio;
         setResult({
+            sourceAmount: +amount,
             targetAmount: +amount / rate,
-            currency,
+            currency
         });
-
     };
 
     return (
