@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 function App() {
-    const [result, setResult] = useState({});
+    const [result, setResult] = useState(null);
 
     const calculateResult = (amount, currency) => {
         const rate = currency?.ratio;
