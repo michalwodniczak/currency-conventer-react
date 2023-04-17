@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Demo
 https://widmo200.github.io/currency-conventer-react/
-![previev]()./public/preview.gif)
+![previev](./public/preview.gif)
 ## Available Scripts
 
 In the project directory, you can run:
