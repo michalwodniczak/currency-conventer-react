@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Demo
 https://widmo200.github.io/currency-conventer-react/
-![previev].public/preview.gif
+![previev]()./public/preview.gif)
 ## Available Scripts
 
 In the project directory, you can run:
@@ -48,4 +48,4 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 ## Contact
-[Author]https://github.com/widmo200/
+[Author](https://github.com/widmo200/)
