@@ -3,7 +3,6 @@ import { Form } from "./Form";
 import { Footer } from "./Footer";
 import { useState } from "react";
 
-
 function App() {
     const [result, setResult] = useState(null);
 

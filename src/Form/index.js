@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./style.css";
 import { currencies } from "../currencies";
+
 const Form = ({ result, calculateResult }) => {
     const [currency, setCurrency] = useState(currencies[0]);
     const [amount, setAmount] = useState("");
@@ -49,7 +50,10 @@ const Form = ({ result, calculateResult }) => {
                 Przelicz
             </button>
             <p className="form__resultText">
-                {result ? `za ${result.sourceAmount.toFixed(2)}zł otrzymamy ${result.targetAmount.toFixed(2)} ${result.currency.id}` : "Tutaj pojawi się kurs walut:"}
+                {result
+                    ? `za ${result.sourceAmount.toFixed(2)}zł otrzymamy ${result.targetAmount.toFixed(2)} ${result.currency.id}`
+                    : "Wynik przewalutowania:"
+                }
             </p>
             <p>
                 Kurs walut z dnia 27.12.2022
