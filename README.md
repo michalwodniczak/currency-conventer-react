@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Features
 - HTML
 - CSS
-- Javascript with React
+- Javascript with React and use hook: ( useState , useEffect )
 - Convention BEM
 
 ## Demo
