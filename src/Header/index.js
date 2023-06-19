@@ -1,9 +1,11 @@
-import "./style.css"
+import { Title } from "./styled";
 
 const Header = () => (
-    <header className="header">
-        <h1 className="header__head">Wymiana walut</h1>
+    <header>
+        <Title>
+            Wymiana walut
+        </Title>
     </header>
 )
 
-export { Header }
+export { Header };
