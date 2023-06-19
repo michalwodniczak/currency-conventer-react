@@ -1,9 +1,9 @@
-import "./style.css";
+import { StyledFooter } from "./styled";
 
 const Footer = () => (
-    <footer className="footer">
+    <StyledFooter>
         Copyright&copy; 2022 by Widmo
-    </footer>
-)
+    </StyledFooter>
+);
 
-export { Footer }
+export { Footer };
