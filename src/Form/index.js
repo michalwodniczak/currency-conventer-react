@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./style.css";
+import { Label, Input, Button, ResultText } from "./styled";
 import { currencies } from "../currencies";
 
 const Form = ({ result, calculateResult }) => {
@@ -18,24 +18,25 @@ const Form = ({ result, calculateResult }) => {
     return (
         <form onSubmit={onFormSubmit}>
             <label>
-                <span className="form__labelText">
+                <Label>
                     Wybierz walute na którą chcesz wymienić*:
-                </span>
-                <select
+                </Label>
+                <Input
+                    as="select"
                     value={currency.name}
-                    className="form__input"
                     onChange={onChangeCurrency}
                 >
                     {currencies.map(currency => (<option key={currency.id}>{currency.name}</option>)
                     )};
-                </select>
+                </Input>
             </label>
             <label>
-                <span className="form__labelText">Wpisz ilość w zł*:</span>
-                <input
+                <Label>
+                    Wpisz ilość w zł*:
+                </Label>
+                <Input
                     value={amount}
                     onChange={({ target }) => setAmount(target.value)}
-                    className="form__input"
                     type="number"
                     name="amount"
                     step="any"
@@ -43,18 +44,18 @@ const Form = ({ result, calculateResult }) => {
                     required
                 />
             </label>
-            <button
+            <Button
                 onClick={() => calculateResult(amount, currency)}
-                className="form__button"
-                type="submit">
+                type="submit"
+            >
                 Przelicz
-            </button>
-            <p className="form__resultText">
+            </Button>
+            <ResultText>
                 {result
                     ? `za ${result.sourceAmount.toFixed(2)}zł otrzymamy ${result.targetAmount.toFixed(2)} ${result.currency.id}`
                     : "Wynik przewalutowania:"
                 }
-            </p>
+            </ResultText>
             <p>
                 Kurs walut z dnia 27.12.2022
             </p>
