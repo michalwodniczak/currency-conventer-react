@@ -1,8 +1,20 @@
+import styled from "styled-components";
 import { Header } from "./Header";
 import { Form } from "./Form";
 import { Footer } from "./Footer";
 import { useState } from "react";
 import { Clock } from "./Clock";
+
+const Container = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  background-color: #7fffd4;
+  line-height: 1.5;
+  border-radius: 5px;
+  font-size: 18px;
+`
 
 function App() {
     const [result, setResult] = useState(null);
@@ -17,14 +29,14 @@ function App() {
     };
 
     return (
-        <div className="container">
+        <Container>
             <Header />
             <main>
                 <Clock />
                 <Form result={result} calculateResult={calculateResult} />
             </main>
             <Footer />
-        </div>
+        </Container>
     );
 }
 
