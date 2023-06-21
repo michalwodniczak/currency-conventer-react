@@ -32,5 +32,5 @@ export const ResultText = styled.p`
     border-radius: 5px;
     margin: 20px auto;
     text-align: center;
-    background-color: #2dac81;
+    background-color:${({theme}) => theme.color.secondColor};
 `;
