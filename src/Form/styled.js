@@ -5,7 +5,7 @@ export const Label = styled.span`
     margin: 0 auto;
     max-width: 250px;
     font-size: 20px;
-    color: #2e2c2c;
+    color: ${({theme}) => theme.color.mineShaft};
 `;
 
 export const Input = styled.input`
@@ -32,5 +32,5 @@ export const ResultText = styled.p`
     border-radius: 5px;
     margin: 20px auto;
     text-align: center;
-    background-color:${({theme}) => theme.color.secondColor};
+    background-color:${({theme}) => theme.color.jungleGreen};
 `;

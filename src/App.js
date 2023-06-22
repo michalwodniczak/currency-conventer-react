@@ -7,17 +7,19 @@ import { Clock } from "./Clock";
 
 const theme = {
     color:{
-        primaryColor:"aquamarine",
-        secondColor:"#2DAC81",
+        aquamarine:"#7FFFD4",
+        jungleGreen:"#2DAC81",
+        mineShaft:"#2e2c2c",
+        blueRibbon:"#0869E7",
     },
-}
+}   
 
 const Container = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   text-align: center;
   font-family: 'Lato', sans-serif;
-  background-color: ${({theme}) => theme.color.primaryColor};
+  background-color: ${({theme}) => theme.color.aquamarine};
   line-height: 1.5;
   border-radius: 5px;
   font-size: 18px;
