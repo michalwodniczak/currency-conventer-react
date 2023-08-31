@@ -1,8 +1,28 @@
-import { useState } from "react";
+import axios from "axios"
+import { useState, useEffect } from "react";
 import { Label, Input, Button, ResultText } from "./styled";
 import { currencies } from "../currencies";
 
+const useGetApiDate = () => {
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get("https://api.exchangerate.host/latest?base=PLN")
+                const { date } = await response.data
+                if (!response.ok) {
+                    new Error(response.statusText)
+                }
+                console.log({ date })
+            }
+            catch (error) {
+                alert(error)
+            }
+        })();
+    });
+};
+
 const Form = ({ result, calculateResult }) => {
+    useGetApiDate();
     const [currency, setCurrency] = useState(currencies[0]);
     const [amount, setAmount] = useState("");
     const onFormSubmit = (event) => {
