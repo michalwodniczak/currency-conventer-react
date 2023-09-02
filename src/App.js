@@ -6,20 +6,20 @@ import { useState } from "react";
 import { Clock } from "./Clock";
 
 const theme = {
-    color:{
-        aquamarine:"#7FFFD4",
-        jungleGreen:"#2DAC81",
-        mineShaft:"#2e2c2c",
-        blueRibbon:"#0869E7",
+    color: {
+        aquamarine: "#7FFFD4",
+        jungleGreen: "#2DAC81",
+        mineShaft: "#2e2c2c",
+        blueRibbon: "#0869E7",
     },
-}   
+}
 
 const Container = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   text-align: center;
   font-family: 'Lato', sans-serif;
-  background-color: ${({theme}) => theme.color.aquamarine};
+  background-color: ${({ theme }) => theme.color.aquamarine};
   line-height: 1.5;
   border-radius: 5px;
   font-size: 18px;
@@ -30,7 +30,7 @@ function App() {
 
     const calculateResult = (amount, currency) => {
         const rate = currency?.ratio;
-        if (amount >= 1){
+        if (amount >= 1) {
             setResult({
                 sourceAmount: +amount,
                 targetAmount: +amount / rate,
@@ -45,7 +45,7 @@ function App() {
                 <Header />
                 <main>
                     <Clock />
-                    <Form result={result} calculateResult={calculateResult}/>
+                    <Form result={result} calculateResult={calculateResult} />
                 </main>
                 <Footer />
             </Container>
