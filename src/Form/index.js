@@ -4,25 +4,37 @@ import { Label, Input, Button, ResultText } from "./styled";
 import { currencies } from "../currencies";
 
 const useGetApiDate = () => {
-    useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get("https://api.exchangerate.host/latest?base=PLN")
-                const { date } = await response.data
-                if (!response.ok) {
-                    new Error(response.statusText)
-                }
-                console.log({ date })
-            }
-            catch (error) {
-                alert(error)
-            }
-        })();
-    });
-};
+    const [date, setDate] = useState("");
+    const [refresh, setRefresh] = useState(true);
 
+    const getDate = async () => {
+        try {
+            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN")
+            const { date } = await response.data
+            setDate(date);
+            if (!response.ok) {
+                new Error(response.statusText)
+            }
+            console.log({ date })
+        }
+        catch (error) {
+            alert(error)
+        }
+    };
+
+    useEffect(() => {
+        getDate()
+    }, []);
+
+    const loadDate = () => {
+        getDate()
+        setRefresh(true)
+    }
+
+    return { date, refresh, loadDate }
+};
 const Form = ({ result, calculateResult }) => {
-    useGetApiDate();
+    const { date, refresh, loadDate } = useGetApiDate();
     const [currency, setCurrency] = useState(currencies[0]);
     const [amount, setAmount] = useState("");
     const onFormSubmit = (event) => {
@@ -34,6 +46,10 @@ const Form = ({ result, calculateResult }) => {
         const selectCurrency = currencies.find(currency => currency.name === target.value);
         setCurrency(selectCurrency);
     };
+
+    useEffect(() => {
+        loadDate(refresh)
+    }, [refresh, loadDate])
 
     return (
         <form onSubmit={onFormSubmit}>
@@ -76,8 +92,8 @@ const Form = ({ result, calculateResult }) => {
                     : "Wynik przewalutowania:"
                 }
             </ResultText>
-            <p>
-                Kurs walut z dnia 27.12.2022
+            <p date={date}>
+                {date}
             </p>
         </form >
     )
