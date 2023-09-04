@@ -5,36 +5,28 @@ import { currencies } from "../currencies";
 
 const useGetApiDate = () => {
     const [date, setDate] = useState("");
-    const [refresh, setRefresh] = useState(true);
 
     const getDate = async () => {
         try {
-            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN")
-            const { date } = await response.data
+            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN?date");
+            const { date } = response.data;
             setDate(date);
+            console.log("Data z APi", { date });
             if (!response.ok) {
                 new Error(response.statusText)
             }
-            console.log({ date })
         }
         catch (error) {
             alert(error)
         }
     };
-
     useEffect(() => {
         getDate()
-    }, []);
-
-    const loadDate = () => {
-        getDate()
-        setRefresh(true)
-    }
-
-    return { date, refresh, loadDate }
+    }, [])
+    return { date };
 };
 const Form = ({ result, calculateResult }) => {
-    const { date, refresh, loadDate } = useGetApiDate();
+    const { date } = useGetApiDate();
     const [currency, setCurrency] = useState(currencies[0]);
     const [amount, setAmount] = useState("");
     const onFormSubmit = (event) => {
@@ -46,10 +38,6 @@ const Form = ({ result, calculateResult }) => {
         const selectCurrency = currencies.find(currency => currency.name === target.value);
         setCurrency(selectCurrency);
     };
-
-    useEffect(() => {
-        loadDate(refresh)
-    }, [refresh, loadDate])
 
     return (
         <form onSubmit={onFormSubmit}>
@@ -92,7 +80,7 @@ const Form = ({ result, calculateResult }) => {
                     : "Wynik przewalutowania:"
                 }
             </ResultText>
-            <p date={date}>
+            <p>
                 {date}
             </p>
         </form >
