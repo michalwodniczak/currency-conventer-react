@@ -5,10 +5,10 @@ import { currencies } from "../currencies";
 
 const useGetApiDate = () => {
     const [date, setDate] = useState("");
-    const [rate,setRate] = useState({});
+    const [rate, setRate] = useState({});
     const getDate = async () => {
         try {
-            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN?date?");
+            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN?date=now");
             const { date } = response.data;
             const { rates } = response.data;
             setRate(rates);
@@ -25,12 +25,12 @@ const useGetApiDate = () => {
     };
     useEffect(() => {
         getDate();
-    }, [])
+    }, []);
 
-    return { date ,rate};
+    return { date, rate }
 };
 const Form = ({ result, calculateResult }) => {
-    const { date ,rate} = useGetApiDate();
+    const { date, rate } = useGetApiDate();
     const [currency, setCurrency] = useState(currencies[0]);
     const [amount, setAmount] = useState("");
     const onFormSubmit = (event) => {
