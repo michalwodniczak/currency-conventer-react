@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react";
 import { Label, Input, Button, ResultText } from "./styled";
-//import { currencies } from "../currencies";
+
 
 const useGetApiDate = () => {
     const [date, setDate] = useState("");
@@ -15,17 +15,16 @@ const useGetApiDate = () => {
                 name: currency,
                 value: response.data.rates[currency]
                 
-            }))
+            }));
             setDate(date);
             setCurrencies(currencyData);
-            console.log(currencyData);
             if (!response.ok) {
                 new Error(response.statusText)
-            }
+            };
         }
         catch (error) {
             console.error(error)
-        }
+        };
     };
     useEffect(() => {
         getDate();
