@@ -1,20 +1,24 @@
 import axios from "axios"
 import { useState, useEffect } from "react";
 import { Label, Input, Button, ResultText } from "./styled";
-import { currencies } from "../currencies";
+//import { currencies } from "../currencies";
 
 const useGetApiDate = () => {
     const [date, setDate] = useState("");
-    const [rate, setRate] = useState({});
+    const [currencies, setCurrencies] = useState([]);
     const getDate = async () => {
         try {
-            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN?date=now");
+            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN");
             const { date } = response.data;
-            const { rates } = response.data;
-            setRate(rates);
-            console.log(rates)
+            const currenciesKey = Object.keys(response.data.rates);
+            const currencyData = currenciesKey.map(currency => ({
+                name: currency,
+                value: response.data.rates[currency]
+                
+            }))
             setDate(date);
-            console.log("Data z APi", { date });
+            setCurrencies(currencyData);
+            console.log(currencyData);
             if (!response.ok) {
                 new Error(response.statusText)
             }
@@ -27,11 +31,12 @@ const useGetApiDate = () => {
         getDate();
     }, []);
 
-    return { date, rate }
+    return { date, currencies }
 };
+
 const Form = ({ result, calculateResult }) => {
-    const { date, rate } = useGetApiDate();
-    const [currency, setCurrency] = useState(currencies[0]);
+    const { date, currencies } = useGetApiDate();
+    const [currency, setCurrency] = useState(currencies);
     const [amount, setAmount] = useState("");
     const onFormSubmit = (event) => {
         event.preventDefault();
@@ -54,7 +59,7 @@ const Form = ({ result, calculateResult }) => {
                     value={currency.name}
                     onChange={onChangeCurrency}
                 >
-                    {currencies.map(currency => (<option key={currency.id}>{currency.name}</option>)
+                    {currencies.map(currency => (<option key={currency.name}>{currency.name}</option>)
                     )};
                 </Input>
             </label>
@@ -80,7 +85,7 @@ const Form = ({ result, calculateResult }) => {
             </Button>
             <ResultText>
                 {result
-                    ? `za ${result.sourceAmount.toFixed(2)}zł otrzymamy ${result.targetAmount.toFixed(2)} ${result.currency.id}`
+                    ? `za ${result.sourceAmount.toFixed(2)}zł otrzymamy ${result.targetAmount.toFixed(2)} ${currency.name}`
                     : "Wynik przewalutowania:"
                 }
             </ResultText>

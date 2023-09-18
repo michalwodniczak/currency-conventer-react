@@ -29,11 +29,11 @@ function App() {
     const [result, setResult] = useState(null);
 
     const calculateResult = (amount, currency) => {
-        const rate = currency?.ratio;
+        const rate = currency?.value;
         if (amount >= 1) {
             setResult({
                 sourceAmount: +amount,
-                targetAmount: +amount / rate,
+                targetAmount: +amount * rate,
                 currency
             });
         };
