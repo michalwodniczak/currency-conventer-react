@@ -2,19 +2,18 @@ import axios from "axios"
 import { useState, useEffect } from "react";
 import { Label, Input, Button, ResultText } from "./styled";
 
-
 const useGetApiDate = () => {
     const [date, setDate] = useState("");
     const [currencies, setCurrencies] = useState([]);
     const getDate = async () => {
         try {
-            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN");
+            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN&symbols=USD,GBP,EUR");
             const { date } = response.data;
             const currenciesKey = Object.keys(response.data.rates);
             const currencyData = currenciesKey.map(currency => ({
                 name: currency,
                 value: response.data.rates[currency]
-                
+
             }));
             setDate(date);
             setCurrencies(currencyData);
@@ -29,8 +28,7 @@ const useGetApiDate = () => {
     useEffect(() => {
         getDate();
     }, []);
-
-    return { date, currencies }
+    return { date, currencies}
 };
 
 const Form = ({ result, calculateResult }) => {
@@ -84,7 +82,7 @@ const Form = ({ result, calculateResult }) => {
             </Button>
             <ResultText>
                 {result
-                    ? `za ${result.sourceAmount.toFixed(2)}zł otrzymamy ${result.targetAmount.toFixed(2)} ${currency.name}`
+                    ? `za ${result.sourceAmount.toFixed(2)}zł otrzymamy ${result.targetAmount.toFixed(2)} ${result.currency.name}`
                     : "Wynik przewalutowania:"
                 }
             </ResultText>
