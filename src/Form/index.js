@@ -5,9 +5,10 @@ import { Label, Input, Button, ResultText } from "./styled";
 const useGetApiDate = () => {
     const [date, setDate] = useState("");
     const [currencies, setCurrencies] = useState([]);
+
     const getDate = async () => {
         try {
-            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN&symbols=USD,GBP,EUR");
+            const response = await axios.get("ddhttps://api.exchangerate.host/latest?base=PLN&symbols=USD,GBP,EUR");
             const { date } = response.data;
             const currenciesKey = Object.keys(response.data.rates);
             const currencyData = currenciesKey.map(currency => ({
@@ -18,7 +19,7 @@ const useGetApiDate = () => {
             setDate(date);
             setCurrencies(currencyData);
             if (!response.ok) {
-                new Error(response.statusText)
+                throw new Error(response.statusText)
             };
         }
         catch (error) {
@@ -28,11 +29,12 @@ const useGetApiDate = () => {
     useEffect(() => {
         getDate();
     }, []);
-    return { date, currencies}
+    return { date, currencies }
 };
 
 const Form = ({ result, calculateResult }) => {
     const { date, currencies } = useGetApiDate();
+    const [render, setRender] = useState(false);
     const [currency, setCurrency] = useState(currencies);
     const [amount, setAmount] = useState("");
     const onFormSubmit = (event) => {
@@ -44,6 +46,19 @@ const Form = ({ result, calculateResult }) => {
         const selectCurrency = currencies.find(currency => currency.name === target.value);
         setCurrency(selectCurrency);
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setRender(true)
+        }, 1000)
+    }, [])
+
+    if (!render) {
+        return (
+            <p>
+                Trwa ładowanie strony aktualnie
+            </p>)
+    }
 
     return (
         <form onSubmit={onFormSubmit}>
