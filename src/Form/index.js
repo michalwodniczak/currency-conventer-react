@@ -9,8 +9,8 @@ const useGetApiDate = () => {
     const getDate = async () => {
         try {
             const response = await axios.get("https://api.currencyapi.com/v3/latest?apikey=cur_live_00iCPiJtKhkb0hKcDkWzA3JG9TJ55BUjiItS11wH&currencies=EUR%2CUSD%2CGBP&base_currency=PLN");
-            const dataKey = Object.keys(response.data.meta);
-            const date = dataKey.map(data => data.toLocaleString())
+            const date =  response.data.meta.last_updated_at
+            
             const currenciesKey = Object.keys(response.data.data);
             const currencyData = currenciesKey.map(currency => ({
                 name: currency,
