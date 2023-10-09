@@ -8,24 +8,24 @@ const useGetApiDate = () => {
 
     const getDate = async () => {
         try {
-            const response = await axios.get("https://api.exchangerate.host/latest?base=PLN&symbols=USD,GBP,EUR");
-            const { date } = response.data;
-            const currenciesKey = Object.keys(response.data.rates);
+            const response = await axios.get("https://api.currencyapi.com/v3/latest?apikey=cur_live_00iCPiJtKhkb0hKcDkWzA3JG9TJ55BUjiItS11wH&currencies=EUR%2CUSD%2CGBP&base_currency=PLN");
+            const dataKey = Object.keys(response.data.meta);
+            const date = dataKey.map(data => data.toLocaleString())
+            const currenciesKey = Object.keys(response.data.data);
             const currencyData = currenciesKey.map(currency => ({
                 name: currency,
-                value: response.data.rates[currency]
-
-            }));
+                value: response.data.data[currency].value
+            }))
             setDate(date);
             setCurrencies(currencyData);
+            console.log(date)
             if (!response.ok) {
-                 new Error(response.statusText)
+                new Error(response.statusText)
             };
         }
         catch (error) {
-            const problem = error
-            console.log(problem)
-        };
+            console.log(error)
+        }
     };
     useEffect(() => {
         getDate();
