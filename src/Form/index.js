@@ -5,12 +5,14 @@ import { Label, Input, Button, ResultText } from "./styled";
 const useGetApiDate = () => {
     const [date, setDate] = useState("");
     const [currencies, setCurrencies] = useState([]);
+    const [error, setError] = useState(null);
 
     const getDate = async () => {
         try {
-            const response = await axios.get("https://api.currencyapi.com/v3/latest?apikey=cur_live_00iCPiJtKhkb0hKcDkWzA3JG9TJ55BUjiItS11wH&currencies=EUR%2CUSD%2CGBP&base_currency=PLN");
-            const date =  response.data.meta.last_updated_at
-            
+            const response = await axios.get("https://api.currencyapi.com/v3/latest?apikey=cur_live_puWbaZQ1QVUVJ9aeXXGa69BCp8nCIbT82qT8SSgm&currencies=EUR%2CUSD%2CGBP&base_currency=PLN");
+            const apiDate = response.data.meta.last_updated_at
+            const myDate = new Date(apiDate)
+            const date = myDate.toLocaleDateString();
             const currenciesKey = Object.keys(response.data.data);
             const currencyData = currenciesKey.map(currency => ({
                 name: currency,
@@ -18,23 +20,23 @@ const useGetApiDate = () => {
             }))
             setDate(date);
             setCurrencies(currencyData);
-            console.log(date)
             if (!response.ok) {
-                new Error(response.statusText)
+                throw new Error(response.statusText)
             };
         }
         catch (error) {
-            console.log(error)
+            setError("Wystąpił błąd ponieważ najprawdopodobniej nie masz internetu")
+            console.error(error)
         }
     };
     useEffect(() => {
         getDate();
     }, []);
-    return { date, currencies }
+    return { date, currencies, error }
 };
 
 const Form = ({ result, calculateResult }) => {
-    const { date, currencies } = useGetApiDate();
+    const { date, currencies, error } = useGetApiDate();
     const [render, setRender] = useState(false);
     const [currency, setCurrency] = useState(currencies);
     const [amount, setAmount] = useState("");
@@ -61,6 +63,12 @@ const Form = ({ result, calculateResult }) => {
             </p>)
     }
 
+    if (error) {
+        return (
+            <p>{error}</p>
+        )
+    }
+
     return (
         <form onSubmit={onFormSubmit}>
             <label>
@@ -72,7 +80,7 @@ const Form = ({ result, calculateResult }) => {
                     value={currency.name}
                     onChange={onChangeCurrency}
                 >
-                    {currencies.map(currency => (<option key={currency.name}>{currency.name}</option>)
+                    {currencies.map(currency => (<option key={currency.name} value={currency.name}>{currency.name}</option>)
                     )};
                 </Input>
             </label>
