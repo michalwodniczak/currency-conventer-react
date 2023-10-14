@@ -21,12 +21,11 @@ const useGetApiDate = () => {
             setDate(date);
             setCurrencies(currencyData);
             if (!response.ok) {
-                throw new Error(response.statusText)
+                new Error(response.statusText)
             };
         }
         catch (error) {
-            setError("Wystąpił błąd ponieważ najprawdopodobniej nie masz internetu")
-            console.error(error)
+            setError("Wystąpił błąd, coś poszło nie tak:(. Sprawdź swoje połączenie z internetem. Jeśli masz to wygląda na to że to nasza wina :<. Spróbuj ponownie za jakiś czas")
         }
     };
     useEffect(() => {
@@ -59,13 +58,13 @@ const Form = ({ result, calculateResult }) => {
     if (!render) {
         return (
             <p>
-                Trwa ładowanie strony aktualnie
+                Trwa pobieranie danych
             </p>)
     }
 
     if (error) {
         return (
-            <p>{error}</p>
+            <ResultText>{error}</ResultText>
         )
     }
 
