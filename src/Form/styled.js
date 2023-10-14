@@ -27,7 +27,7 @@ export const Button = styled.button`
 `;
 
 export const ResultText = styled.p`
-    max-width: 350px;
+    max-width: 500px;
     padding: 25px;
     border-radius: 5px;
     margin: 20px auto;
