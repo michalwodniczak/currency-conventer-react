@@ -16,6 +16,7 @@ const theme = {
 
 const Container = styled.div`
   max-width: 1000px;
+  min-height: 800px;
   margin: 0 auto;
   text-align: center;
   font-family: 'Lato', sans-serif;
