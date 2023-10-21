@@ -9,7 +9,7 @@ export const useGetApiDate = () => {
     });
 
     useEffect(() => {
-        const url = "ddhttps://api.currencyapi.com/v3/latest?apikey=cur_live_NdeppBDyPclNp621W5p3YmiJkDVgwAQWjWOUIp0N&currencies=EUR%2CUSD%2CGBP&base_currency=PLN";
+        const url = "https://api.currencyapi.com/v3/latest?apikey=cur_live_NdeppBDyPclNp621W5p3YmiJkDVgwAQWjWOUIp0N&currencies=EUR%2CUSD%2CGBP&base_currency=PLN";
 
         const getDate = async () => {
 
