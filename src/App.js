@@ -2,7 +2,6 @@ import styled, { ThemeProvider } from "styled-components";
 import { Header } from "./Header";
 import { Form } from "./Form";
 import { Footer } from "./Footer";
-import { useState } from "react";
 import { Clock } from "./Clock";
 
 const theme = {
@@ -27,26 +26,13 @@ const Container = styled.div`
 `
 
 function App() {
-    const [result, setResult] = useState(null);
-
-    const calculateResult = (amount, currency) => {
-        const rate = currency?.value;
-        if (amount >= 1) {
-            setResult({
-                sourceAmount: +amount,
-                targetAmount: +amount * rate,
-                currency
-            });
-        };
-    };
-
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <Header />
                 <main>
                     <Clock />
-                    <Form result={result} calculateResult={calculateResult} />
+                    <Form />
                 </main>
                 <Footer />
             </Container>
