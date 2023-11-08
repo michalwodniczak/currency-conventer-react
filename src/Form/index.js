@@ -5,7 +5,7 @@ import { useGetApiDate } from "./useGetApiDate";
 const Form = () => {
     const [result, setResult] = useState(null);
     const { date, currencies, state } = useGetApiDate().apiValue;
-    const [currency, setCurrency] = useState(currencies);
+    const [currency, setCurrency] = useState("EUR");
     const [amount, setAmount] = useState("");
     const onFormSubmit = (event) => {
         event.preventDefault();
@@ -13,19 +13,21 @@ const Form = () => {
     };
 
     const calculateResult = (amount, currency) => {
-        const rate = currency?.value;
-        if (amount >= 1) {
-            setResult({
-                sourceAmount: +amount,
-                targetAmount: +amount * rate,
-                currency,
-            });
+        const selectedCurrency = currencies.find(currencyItem => currencyItem.name === currency);
+        if (selectedCurrency) {
+            const rate = selectedCurrency.value;
+            if (amount >= 1) {
+                setResult({
+                    sourceAmount: +amount,
+                    targetAmount: +amount * rate,
+                    currency: selectedCurrency,
+                });
+            };
         };
     };
 
     const onChangeCurrency = ({ target }) => {
-        const selectCurrency = currencies.find(currency => currency.name === target.value);
-        setCurrency(selectCurrency);
+        setCurrency(target.value);
     };
 
     return (
@@ -50,7 +52,7 @@ const Form = () => {
                                     </Label>
                                     <Input
                                         as="select"
-                                        value={currency.name}
+                                        value={currency}
                                         onChange={onChangeCurrency}
                                     >
                                         {currencies.map(currency => (<option key={currency.name} value={currency.name}>{currency.name}</option>)
